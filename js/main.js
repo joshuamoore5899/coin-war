@@ -5,7 +5,6 @@ document.querySelector('#reset').addEventListener('click', reset);
 
 
 if (localStorage.getItem('count')) {
-  console.log('Yes');
   let count = localStorage.getItem('count')
   document.querySelector('#score').innerText = count;
 }
@@ -18,7 +17,6 @@ else {
 
 
 if (localStorage.getItem('computer-count')) {
-  console.log('Yes');
   let computerCount = localStorage.getItem('computer-count');
   document.querySelector('#computer-score').innerText = computerCount;
 }
@@ -31,23 +29,29 @@ else {
 
 
 function reset() {
-  console.log('in reset')
   count = 0;
   computerCount = 0;
   localStorage.setItem('count', count);
   localStorage.setItem('computer-count', computerCount);
+  document.querySelector('h3').innerText = "";
+  document.querySelector('#result-img').src = '#';
   document.querySelector('#score').innerText = count;
   document.querySelector('#computer-score').innerText = computerCount;
 }
 
 async function heads() {
-    document.querySelector('span').innerText = "";
     const userGuess = 'HEADS';
     const res = await fetch('/api');
     const data = await res.json();
 
     let result = data.result;
-    document.querySelector('span').innerText = result;
+    if (result === "TAILS") {
+      document.querySelector('#result-img').src = '/images/tails.jpg';
+    }
+    else {
+      document.querySelector('#result-img').src = '/images/heads.jpg';
+    }
+    // document.querySelector('span').innerText = result;
     if (result === userGuess) {
       document.querySelector('h3').innerText = 'You win!';
       count = localStorage.getItem('count');
@@ -65,13 +69,18 @@ async function heads() {
 }
 
 async function tails() {
-    document.querySelector('span').innerText = "";
     const userGuess = 'TAILS';
     const res = await fetch('/api');
     const data = await res.json();
 
     let result = data.result;
-    document.querySelector('span').innerText = result;
+    if (result === "TAILS") {
+      document.querySelector('#result-img').src = '/images/tails.jpg';
+    }
+    else {
+      document.querySelector('#result-img').src = '/images/heads.jpg';
+    }
+    // document.querySelector('span').innerText = result;
     if (result === userGuess) {
       document.querySelector('h3').innerText = 'You win!';
       count = localStorage.getItem('count');

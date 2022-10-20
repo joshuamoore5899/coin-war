@@ -18,6 +18,14 @@ app.get('/css/style.css', (req, res) => {
   res.sendFile(__dirname + '/css/style.css')
 })
 
+app.get('/images/heads.jpg', (req, res) => {
+  res.sendFile(__dirname + '/images/heads.jpg')
+})
+
+app.get('/images/tails.jpg', (req, res) => {
+  res.sendFile(__dirname + '/images/tails.jpg')
+})
+
 app.get('/api', (req, res) => {
   let result = Math.random() * 100;
   let ans = "";
